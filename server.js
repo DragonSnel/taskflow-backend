@@ -16,8 +16,9 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
-  ssl: false  // ВАЖНО! Отключаем SSL
+  ssl: { rejectUnauthorized: false }  // Railway требует SSL
 });
+
 
 // Проверка подключения к базе
 pool.connect()
