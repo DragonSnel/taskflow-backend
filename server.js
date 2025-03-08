@@ -10,6 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const { Pool } = require('pg');
+
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -19,8 +21,7 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }  // Railway требует SSL
 });
 
-
-// Проверка подключения к базе
+// Проверяем подключение
 pool.connect()
   .then(() => console.log("📡 PostgreSQL подключен!"))
   .catch(err => console.error("❌ Ошибка подключения к БД:", err));
